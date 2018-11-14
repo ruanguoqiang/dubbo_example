@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>server</artifactId>
+        <groupId>com.qiangge</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>server-mybatis</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qiangge</groupId>
+            <artifactId>server-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Mybatis核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+
+        <!-- Mybatis-Spring包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <!-- MySql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+    <resources>
+        <!-- Intellij idea兼容 -->
+        <resource>
+            <directory>src/main/java</directory>
+            <includes>
+                <include>**/*.xml</include>
+            </includes>
+        </resource>
+
+        <resource>
+            <directory>src/main/resources</directory>
+            <!-- 过滤替换配置文件变量 -->
+            <filtering>true</filtering>
+        </resource>
+
+        <!-- 环境配置文件 -->
+        <resource>
+            <directory>deploy/${env}</directory>
+        </resource>
+    </resources>
+    </build>
+
+</project>

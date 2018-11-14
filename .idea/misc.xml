@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/client" />
+    <file type="web" url="file://$PROJECT_DIR$/server/server-controller" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/client/pom.xml" />
+        <option value="$PROJECT_DIR$/server/server-pojo/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/dwq/pom.xml" />
+        <option value="$PROJECT_DIR$/moji/pom.xml" />
+        <option value="$PROJECT_DIR$/server/server-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/serverpojo/pom.xml" />
+        <option value="$PROJECT_DIR$/sq/pom.xml" />
+        <option value="$PROJECT_DIR$/swq/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectResources">
+    <resource url="http://code.alibabatech.com/schema/dubbo/dubbo.xsd" location="$MAVEN_REPOSITORY$/com/alibaba/dubbo/2.6.1/dubbo-2.6.1.jar!/META-INF/dubbo.xsd" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

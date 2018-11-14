@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.genaratexml.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="Permission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appId" property="appid" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="isMenu" property="ismenu" jdbcType="INTEGER" />
+    <result column="isEnable" property="isenable" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, appId, parentId, name, url, sort, isMenu, isEnable, icon
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="PermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="PermissionExample" >
+    delete from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="Permission" >
+    insert into permission (id, appId, parentId, 
+      name, url, sort, isMenu, 
+      isEnable, icon)
+    values (#{id,jdbcType=INTEGER}, #{appid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{ismenu,jdbcType=INTEGER}, 
+      #{isenable,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appid != null" >
+        appId,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="ismenu != null" >
+        isMenu,
+      </if>
+      <if test="isenable != null" >
+        isEnable,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ismenu != null" >
+        #{ismenu,jdbcType=INTEGER},
+      </if>
+      <if test="isenable != null" >
+        #{isenable,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="PermissionExample" resultType="java.lang.Integer" >
+    select count(*) from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update permission
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null" >
+        appId = #{record.appid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.ismenu != null" >
+        isMenu = #{record.ismenu,jdbcType=INTEGER},
+      </if>
+      <if test="record.isenable != null" >
+        isEnable = #{record.isenable,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update permission
+    set id = #{record.id,jdbcType=INTEGER},
+      appId = #{record.appid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      isMenu = #{record.ismenu,jdbcType=INTEGER},
+      isEnable = #{record.isenable,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="Permission" >
+    update permission
+    <set >
+      <if test="appid != null" >
+        appId = #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ismenu != null" >
+        isMenu = #{ismenu,jdbcType=INTEGER},
+      </if>
+      <if test="isenable != null" >
+        isEnable = #{isenable,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Permission" >
+    update permission
+    set appId = #{appid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      isMenu = #{ismenu,jdbcType=INTEGER},
+      isEnable = #{isenable,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findPermissionByRole" resultMap="BaseResultMap" >
+     SELECT * FROM permission p WHERE id IN (
+  SELECT permissionid FROM role_permission rp LEFT JOIN role r ON rp.`roleId`=r.`id` WHERE r.`id`= #{roleid}
+) AND p.appid=#{appid}
+
+  </select>
+
+  <select id="findListById" parameterType="map" resultType="com.common.model.RpcPermission">
+    SELECT DISTINCT
+    p.id,
+    p.parentId,
+    p.name,
+    p.url,
+    p.icon,
+    p.isMenu,
+    p.sort
+    FROM   permission p
+    <if test="userId != null">
+      INNER JOIN role_permission rp ON p.id = rp.permissionId
+      INNER JOIN role r ON r.id = rp.roleId AND r.isEnable = 1
+      INNER JOIN user_role ur ON ur.roleId = r.id
+    </if>
+    WHERE  1 = 1
+    AND p.isEnable = 1
+    <if test="appCode != null">
+      AND EXISTS (SELECT 1
+      FROM   app a
+      WHERE  a.id = p.appId
+      AND a.isEnable = 1
+      AND a.code = #{appCode})
+    </if>
+    <if test="userId != null">
+      AND ur.userId = #{userId}
+    </if>
+    ORDER  BY p.parentId ASC, p.sort DESC
+  </select>
+</mapper>

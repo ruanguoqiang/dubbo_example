@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	       http://www.springframework.org/schema/beans/spring-beans.xsd
+	       http://www.springframework.org/schema/context
+	       http://www.springframework.org/schema/context/spring-context.xsd
+	       http://www.springframework.org/schema/aop
+	       http://www.springframework.org/schema/aop/spring-aop.xsd
+	       http://www.springframework.org/schema/tx
+	       http://www.springframework.org/schema/tx/spring-tx.xsd
+http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<context:annotation-config/>
+
+	<bean class="com.config.ConfigUtil">
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="locations">
+			<list>
+				<!--数据库参数配置 -->
+				<value>classpath:jdbc.properties</value>
+
+				<value>classpath:config.properties</value>
+				<value>classpath:service.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="com.rpc"/>
+	 <aop:aspectj-autoproxy/>
+
+
+	<!--SSO令牌管理(分布式) : 用于部署多JVM实例时，RedisSession覆盖HttpSession实现Session共享 -->
+	<import resource="classpath:spring-redis-sso.xml" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+	</bean>
+	<bean id="redisCache" class="com.token.RedisCache">
+		<property name="redisTemplate" ref="redisTemplate" />
+	</bean>
+	<bean id="tokenManager" class="com.token.RedisTokenManager">
+		<property name="tokenTimeout" value="1800" />
+	</bean>
+
+    <!--<bean id="tokenManager" class="com.token.LocalTokenManager">
+        <property name="tokenTimeout" value="1800"/>
+    </bean>-->
+
+
+<!--
+	<import resource="classpath:applicationContext-rpc.xml"/>
+-->
+
+
+	<!-- Dubbo : 服务提供方 -->
+
+     <import resource="dubbo-provider.xml" />
+
+     <import resource="applicationContext-mybatis.xml"/>
+
+	<!-- activeMQ : 用于权限有修改时，异步通知应用更新权限 -->
+	<import resource="applicationContext-mq.xml" />
+
+</beans>

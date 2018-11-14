@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+    default-lazy-init="false">
+
+<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="sso_contaoller"/>
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="localhost:2181,localhost:2182,localhost:2183" />
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider timeout="10000" threadpool="fixed" threads="100" accepts="1000" />
+
+	<!-- 提供的服务接口 -->
+	<dubbo:service retries="0" interface="com.qiangge.interf.AuthenticationRpcService" ref="authenticationRpcServiceImpl" />
+	<dubbo:service retries="0" interface="com.qiangge.interf.PermissionJmsService" ref="permissionJmsServiceImpl" />
+	<dubbo:service retries="0" interface="com.qiangge.interf.PermissionService" ref="permissionServiceImpl" />
+	<dubbo:service retries="0" interface="com.qiangge.interf.UserService" ref="userServiceImpl" />
+
+
+</beans>  
